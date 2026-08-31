@@ -1,5 +1,5 @@
 from typing import List, Optional
-from model.matrix_model import (
+from matrix_model import (
     MatrixInput,
     Ponto,
     MatrixResponse,
