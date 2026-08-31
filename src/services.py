@@ -1,5 +1,11 @@
 from typing import List, Optional
-from model.matrix_model import MatrixInput, Ponto, MatrixResponse
+from model.matrix_model import (
+    MatrixInput,
+    Ponto,
+    MatrixResponse,
+    Rota,
+    MenorRotaResponse,
+)
 
 def matriz_para_pontos(matriz: List[List[str]]) -> MatrixResponse:
     start: Optional[Ponto] = None
@@ -24,3 +30,21 @@ def matriz_para_pontos(matriz: List[List[str]]) -> MatrixResponse:
         raise ValueError("A matriz deve conter exatamente um ponto inicial 'I'.")
 
     return MatrixResponse(matrix=matriz_pontos, start=start)
+
+
+def encontrar_menor_rota(rotas: List[Rota]) -> MenorRotaResponse:
+    """
+    Recebe todas as possibilidades de caminho com suas respectivas
+    distâncias, ordena pelo valor da distância e retorna o menor
+    caminho junto com sua distância.
+    """
+    if not rotas:
+        raise ValueError("A lista de rotas não pode estar vazia.")
+
+    rotas_ordenadas = sorted(rotas, key=lambda rota: rota.distancia)
+    menor_rota = rotas_ordenadas[0]
+
+    return MenorRotaResponse(
+        caminho=menor_rota.caminho,
+        distancia=menor_rota.distancia,
+    )
