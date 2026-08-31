@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from model.matrix_model import MatrixInput, MatrixResponse
 
-from utils import MatrixUtils
+from utils.matrix_utils import MatrixUtils
 
 router = APIRouter()
 
