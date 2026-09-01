@@ -1,5 +1,5 @@
 from typing import List, Optional
-from matrix_model import MatrixInput, Ponto, MatrixResponse
+from model.matrix_model import MatrixInput, Ponto, MatrixResponse
  
 def matriz_para_pontos(matriz: List[List[str]]) -> MatrixResponse:
     start: Optional[Ponto] = None
