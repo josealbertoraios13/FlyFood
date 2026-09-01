@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from model.matrix_model import MatrixInput, MatrixResponse
+from matrix_model import MatrixInput, MatrixResponse
  
 from services import matriz_para_pontos
  
