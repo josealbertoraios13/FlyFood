@@ -1,3 +1,6 @@
+from typing import List, Optional
+from pydantic import BaseModel, field_validator
+
 # --- Models novos para a task "menor caminho" ---
 
 class CaminhoAvaliado(BaseModel):
