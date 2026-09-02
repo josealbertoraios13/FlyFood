@@ -1,5 +1,5 @@
-from typing import List, Optional
-from pydantic import BaseModel, field_validator
+from typing import List
+from pydantic import BaseModel
 
 # --- Models novos para a task "menor caminho" ---
 
