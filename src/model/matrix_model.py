@@ -1,3 +1,4 @@
+
 from typing import List, Optional
 from pydantic import BaseModel, field_validator
 
@@ -16,8 +17,9 @@ class MatrixInput(BaseModel):
 
 class Ponto(BaseModel):
     x: int
-    y: int 
+    y: int
 
 class MatrixResponse(BaseModel):
     matrix: List[List[Optional[Ponto]]]
     start: Ponto
+
