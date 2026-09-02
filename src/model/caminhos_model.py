@@ -4,7 +4,7 @@ from model.matrix_model import Ponto
 
 # --- Models novos para a task "menor caminho" ---
 
-class CaminhoAvaliado(BaseModel):
+class CaminhoCalculado(BaseModel):
     """Representa uma possibilidade de caminho já com a distância calculada."""
     caminho: List[Ponto]
     distancia: float
