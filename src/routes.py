@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from model.matrix_model import MatrixInput, MatrixResponse
 
-from services import matriz_para_pontos
+from utils.matrix_utils import MatrixUtils
 
 router = APIRouter()
 
@@ -26,6 +26,6 @@ async def obter_pontos(dados: MatrixInput):
 }
     """
     try:
-        return matriz_para_pontos(dados.matrix)
+        return MatrixUtils.matriz_para_pontos(dados.matrix)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
