@@ -8,7 +8,6 @@ from model.matrix_model import (
 from model.caminhos_model import CaminhoAvaliado, MenorCaminhoResponse
 
 @staticmethod
-
 def encontrar_menor_caminho(
     possibilidades: List[CaminhoAvaliado],
 ) -> MenorCaminhoResponse:
