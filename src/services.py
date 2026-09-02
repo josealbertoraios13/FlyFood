@@ -36,11 +36,7 @@ def matriz_para_pontos(matriz: List[List[str]]) -> MatrixResponse:
 def encontrar_menor_caminho(
     possibilidades: List[CaminhoAvaliado],
 ) -> MenorCaminhoResponse:
-    """
-    Recebe todas as possibilidades de caminho junto com suas distâncias,
-    ordena pelo valor da distância e retorna o menor caminho encontrado
-    junto com sua respectiva distância.
-    """
+   
     if not possibilidades:
         raise ValueError("A lista de possibilidades não pode estar vazia.")
 
