@@ -5,7 +5,7 @@ from model.matrix_model import (
     Ponto,
     MatrixResponse,
 )
-from model.caminhos_model import CaminhoAvaliado, MenorCaminhoResponse
+
 
 def matriz_para_pontos(matriz: List[List[str]]) -> MatrixResponse:
     start: Optional[Ponto] = None
