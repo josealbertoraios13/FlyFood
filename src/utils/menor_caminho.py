@@ -1,21 +1,22 @@
 from model import CaminhoCalculado, MenorCaminhoResponse
 
 
-@staticmethod
-def encontrar_menor_caminho(
-    possibilidades: list[CaminhoCalculado],
-) -> MenorCaminhoResponse:
-   
-    if not possibilidades:
-        raise ValueError("A lista de possibilidades não pode estar vazia.")
+class MenorCaminho:
+    @staticmethod
+    def encontrar(
+        caminhos_calculados: list[CaminhoCalculado],
+    ) -> MenorCaminhoResponse:
+    
+        if not caminhos_calculados:
+            raise ValueError("A lista de possibilidades não pode estar vazia.")
 
-    possibilidades_ordenadas = sorted(
-        possibilidades, key=lambda p: p.distancia
-    )
+        caminhos_calculados_ordenados = sorted(
+            caminhos_calculados, key=lambda p: p.distancia
+        )
 
-    menor = possibilidades_ordenadas[0]
+        menor = caminhos_calculados_ordenados[0]
 
-    return MenorCaminhoResponse(
-        caminho=menor.caminho,
-        distancia=menor.distancia,
-    )
+        return MenorCaminhoResponse(
+            caminho=menor.caminho,
+            distancia=menor.distancia,
+        )
