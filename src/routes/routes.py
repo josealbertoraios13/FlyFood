@@ -1,8 +1,7 @@
 from fastapi import APIRouter, HTTPException
 
-from model import MatrixInput, MatrixResponse
+from model import MatrixInput, MenorCaminhoResponse
 from services import processar_matrix
-from utils.matrix_utils import MatrixUtils
 
 router = APIRouter()
 
@@ -11,8 +10,8 @@ async def root():
     return {"message": "API está funcionando!"}
 
 
-@router.post("/flyfood", response_model=MatrixResponse)
-async def obter_pontos(dados: MatrixInput):
+@router.post("/flyfood", response_model=MenorCaminhoResponse)
+async def obter_pontos(dados: MatrixInput) -> MenorCaminhoResponse:
     """
     Endpoint para processar a matriz de entrada e retornar os pontos correspondentes.
 
@@ -26,7 +25,9 @@ async def obter_pontos(dados: MatrixInput):
   ]
 }
     """
+
+    print("Davi")
     try:
-        return MatrixUtils.matriz_para_pontos(dados.matrix)
+        return processar_matrix(dados.matrix)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))

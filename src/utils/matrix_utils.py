@@ -37,17 +37,16 @@ class MatrixUtils:
                 "A matriz deve conter exatamente um ponto inicial 'I'."
             )
 
+        print("Parse da matriz bem sucedido")
         return MatrixResponse(
             matrix=matriz_pontos,
             start=start
         )
 
     @staticmethod
-    def gerar_possibilidades(
-        matrix_response: MatrixResponse
-    ) -> list[list[Ponto]]:
+    def gerar_possibilidades(matrix_response: MatrixResponse) -> list[list[Ponto]]:
         pontos: list[Ponto] = []
-
+        print("Kauan")
         for linha in matrix_response.matrix:
             for ponto in linha:
                 if ponto is not None and ponto != matrix_response.start:
@@ -59,4 +58,5 @@ class MatrixUtils:
             caminho = [matrix_response.start, *permutacao]
             possibilidades.append(caminho)
 
+        print("Todas as possibilidades geradas com sucesso")
         return possibilidades
