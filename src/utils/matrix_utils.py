@@ -1,17 +1,15 @@
 from itertools import permutations
-from typing import List, Optional
 
 from model.matrix_model import Ponto, MatrixResponse
 
-
 class MatrixUtils:
     @staticmethod
-    def matriz_para_pontos(matriz: List[List[str]]) -> MatrixResponse:
-        start: Optional[Ponto] = None
-        matriz_pontos: List[List[Optional[Ponto]]] = []
+    def matriz_para_pontos(matriz: list[list[str]]) -> MatrixResponse:
+        start: Ponto | None = None
+        matriz_pontos: list[list[Ponto | None]] = []
 
         for y, linha in enumerate(matriz):
-            linha_pontos: List[Optional[Ponto]] = []
+            linha_pontos: list[Ponto | None] = []
 
             for x, celula in enumerate(linha):
                 valor = str(celula).strip().upper()
@@ -46,15 +44,15 @@ class MatrixUtils:
     @staticmethod
     def gerar_possibilidades(
         matrix_response: MatrixResponse
-    ) -> List[List[Ponto]]:
-        pontos: List[Ponto] = []
+    ) -> list[list[Ponto]]:
+        pontos: list[Ponto] = []
 
         for linha in matrix_response.matrix:
             for ponto in linha:
                 if ponto is not None and ponto != matrix_response.start:
                     pontos.append(ponto)
 
-        possibilidades: List[List[Ponto]] = []
+        possibilidades: list[list[Ponto]] = []
 
         for permutacao in permutations(pontos):
             caminho = [matrix_response.start, *permutacao]
