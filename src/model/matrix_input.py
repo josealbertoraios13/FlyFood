@@ -1,5 +1,6 @@
 from pydantic import BaseModel, field_validator
 
+
 class MatrixInput(BaseModel):
     matrix: list[list[str]]
 
@@ -15,11 +16,3 @@ class MatrixInput(BaseModel):
             raise ValueError("Todas as linhas da matriz devem ter o mesmo tamanho.")
 
         return value
-
-class Ponto(BaseModel):
-    x: int
-    y: int
-
-class MatrixResponse(BaseModel):
-    matrix: list[list[Ponto | None]]
-    start: Ponto

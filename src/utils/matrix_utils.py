@@ -1,6 +1,7 @@
 from itertools import permutations
 
-from model.matrix_model import Ponto, MatrixResponse
+from model import MatrixResponse, Ponto
+
 
 class MatrixUtils:
     @staticmethod

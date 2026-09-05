@@ -1,15 +1,9 @@
-from typing import List, Optional
-from model.matrix_model import (
-    MatrixInput,
-    Ponto,
-    MatrixResponse,
-)
+from model import CaminhoCalculado, MenorCaminhoResponse
 
-from model.caminhos_model import CaminhoAvaliado, MenorCaminhoResponse
 
 @staticmethod
 def encontrar_menor_caminho(
-    possibilidades: List[CaminhoAvaliado],
+    possibilidades: list[CaminhoCalculado],
 ) -> MenorCaminhoResponse:
    
     if not possibilidades:
