@@ -16,6 +16,6 @@ def processar_matrix(matrix_str : list[list[str]]) -> MenorCaminhoResponse:
     meno_rota = CaminhoUtils.encontrar_o_menor(caminhos_calculados=caminhos_calculados)
 
     fim_time = time.perf_counter()
-    meno_rota.tempo_resolucao_ms = round((fim_time - inicio_time) * 1000, 2)
+    meno_rota.tempo_resolucao_ms = round((fim_time - inicio_time), 2)
 
     return meno_rota
