@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from model import Ponto
+from model.ponto import Ponto
 
 
 class MatrixResponse(BaseModel):

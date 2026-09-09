@@ -5,4 +5,4 @@ from routes import router
 app = FastAPI(title="FLyFood API")
 app.include_router(router)
 
-# uvicorn main:app --reload
+# From the project root: .venv/bin/uvicorn main:app --app-dir src --reload
