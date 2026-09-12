@@ -11,10 +11,10 @@ def carregar_matrix(caminho_arquivo: str | Path) -> MenorCaminhoResponse:
 
     Exemplo de arquivo:
     [
-      ["R", ".", ".", "A"],
-      [".", ".", "B", "."],
-      [".", "C", ".", "."],
-      [".", ".", ".", "D"]
+      ["R", "0", "0", "A"],
+      ["0", "0", "B", "0"],
+      ["0", "C", "0", "0"],
+      ["0", "0", "0", "D"]
     ]
     """
 
