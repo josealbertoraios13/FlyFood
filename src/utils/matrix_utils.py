@@ -1,12 +1,15 @@
+import string
 from itertools import permutations
 
 from model import MatrixResponse, Ponto
 
+ALFABETO_SEM_R = [letra for letra in string.ascii_uppercase if letra != "R"]
 
 class MatrixUtils:
     @staticmethod
     def matriz_para_pontos(matriz: list[list[str]]) -> MatrixResponse:
         start: Ponto | None = None
+        pontos_letras: dict[str, Ponto] = {}
         matriz_pontos: list[list[Ponto | None]] = []
 
         for y, linha in enumerate(matriz):
@@ -15,17 +18,21 @@ class MatrixUtils:
             for x, celula in enumerate(linha):
                 valor = str(celula).strip().upper()
 
-                if valor == "I":
+                if valor == "R":
                     if start is not None:
                         raise ValueError(
-                            "A matriz não pode ter mais de um ponto inicial 'I'."
+                            "A matriz não pode ter mais de um ponto inicial 'R'."
                         )
 
                     start = Ponto(x=x, y=y)
                     linha_pontos.append(start)
 
-                elif valor == "P":
-                    linha_pontos.append(Ponto(x=x, y=y))
+                elif len(valor) == 1 and valor.isalpha():
+                    if valor in pontos_letras:
+                        raise ValueError(f"A letra '{valor} aparece mais de uma vez na matriz")
+                    ponto = Ponto(x=x, y=y)
+                    pontos_letras[valor] = ponto
+                    linha_pontos.append(ponto)
 
                 else:
                     linha_pontos.append(None)
@@ -34,10 +41,13 @@ class MatrixUtils:
 
         if start is None:
             raise ValueError(
-                "A matriz deve conter exatamente um ponto inicial 'I'."
+                "A matriz deve conter exatamente um ponto inicial 'R'."
             )
 
-        print("Parse da matriz bem sucedido")
+        letras_esperadas = ALFABETO_SEM_R[:len(pontos_letras)]
+        if sorted(pontos_letras.keys()) != letras_esperadas:
+            raise ValueError(f"Os pontos de entrega devem ser as letras {letras_esperadas}, em sequência e sem pular nenhuma.")
+        
         return MatrixResponse(
             matrix=matriz_pontos,
             start=start

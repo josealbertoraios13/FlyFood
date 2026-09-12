@@ -1,8 +1,4 @@
-from fastapi import FastAPI
+from routes import carregar_matrix
 
-from routes import router
-
-app = FastAPI(title="FLyFood API")
-app.include_router(router)
-
-# From the project root: .venv/bin/uvicorn main:app --app-dir src --reload
+if __name__ == "__main__":
+    resultado = carregar_matrix("data/matrix.json")

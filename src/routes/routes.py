@@ -1,33 +1,28 @@
-from fastapi import APIRouter, HTTPException
+import json
+from pathlib import Path
 
 from model import MatrixInput, MenorCaminhoResponse
 from services import processar_matrix
 
-router = APIRouter()
 
-@router.get("/")
-async def root():
-    return {"message": "API está funcionando!"}
-
-
-@router.post("/flyfood", response_model=MenorCaminhoResponse)
-async def obter_pontos(dados: MatrixInput) -> MenorCaminhoResponse:
+def carregar_matrix(caminho_arquivo: str) -> MenorCaminhoResponse:
     """
-    Endpoint para processar a matriz de entrada e retornar os pontos correspondentes.
-
-    Exemplo de entrada:
+    Exemplo de arquivo:
     {
-  "matrix": [
-    [".", "I", ".", "P"],
-    [".", ".", "P", "."],
-    ["P", ".", ".", "."],
-    [".", ".", "P", "."]
-  ]
-}
+      "matrix": [
+        [".", "R", ".", "A"],
+        [".", ".", "B", "."],
+        ["C", ".", ".", "."],
+        [".", ".", "D", "."]
+      ]
+    }
     """
 
-    print("Davi")
-    try:
-        return processar_matrix(dados.matrix)
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+    caminho = Path(caminho_arquivo)
+
+    with caminho.open(encoding="utf-8") as arquivo:
+      dados_json = json.load(arquivo)
+
+    dados = MatrixInput(**dados_json)
+
+    return processar_matrix(dados.matrix)
