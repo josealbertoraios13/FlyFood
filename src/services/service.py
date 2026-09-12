@@ -15,7 +15,11 @@ def processar_matrix(matrix_str : list[list[str]]) -> MenorCaminhoResponse:
 
     meno_rota = CaminhoUtils.encontrar_o_menor(caminhos_calculados=caminhos_calculados)
 
-    meno_rota = " ".join(
+    letra_por_coordenada = {
+        (ponto.x, ponto.y): letra for letra, ponto in matrix_response.pontos.items()
+    }
+
+    meno_rota.rota = " ".join(
         letra_por_coordenada[(ponto.x, ponto.y)]
         for ponto in meno_rota.caminho
         if (ponto.x, ponto.y) in letra_por_coordenada

@@ -10,7 +10,7 @@ class MatrixUtils:
         matriz_pontos: list[list[Ponto | int]] = []
 
         for y, linha in enumerate(matriz):
-            linha_pontos: list[Ponto | None] = []
+            linha_pontos: list[Ponto | int] = []
 
             for x, celula in enumerate(linha):
                 valor = str(celula).strip().upper()
@@ -52,18 +52,10 @@ class MatrixUtils:
 
     @staticmethod
     def gerar_possibilidades(matrix_response: MatrixResponse) -> list[list[Ponto]]:
-        pontos: list[Ponto] = []
-        print("Kauan")
-        for linha in matrix_response.matrix:
-            for ponto in linha:
-                if ponto is not None and ponto != matrix_response.start:
-                    pontos.append(ponto)
-
         possibilidades: list[list[Ponto]] = []
 
-        for permutacao in permutations(matrix_response.pontos):
+        for permutacao in permutations(matrix_response.pontos.values()):
             caminho = [matrix_response.start, *permutacao]
             possibilidades.append(caminho)
 
-        print("Todas as possibilidades geradas com sucesso")
         return possibilidades
