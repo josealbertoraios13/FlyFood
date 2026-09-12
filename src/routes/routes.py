@@ -23,6 +23,6 @@ def carregar_matrix(caminho_arquivo: str) -> MenorCaminhoResponse:
     with caminho.open(encoding="utf-8") as arquivo:
       dados_json = json.load(arquivo)
 
-    dados = MatrixInput(**dados_json)
+    dados = MatrixInput(matrix=dados_json)
 
     return processar_matrix(dados.matrix)

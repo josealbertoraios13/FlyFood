@@ -1,16 +1,13 @@
-import string
 from itertools import permutations
 
 from model import MatrixResponse, Ponto
-
-ALFABETO_SEM_R = [letra for letra in string.ascii_uppercase if letra != "R"]
 
 class MatrixUtils:
     @staticmethod
     def matriz_para_pontos(matriz: list[list[str]]) -> MatrixResponse:
         start: Ponto | None = None
-        pontos_letras: dict[str, Ponto] = {}
-        matriz_pontos: list[list[Ponto | None]] = []
+        pontos: dict[str, Ponto] = {}
+        matriz_pontos: list[list[Ponto | int]] = []
 
         for y, linha in enumerate(matriz):
             linha_pontos: list[Ponto | None] = []
@@ -28,14 +25,14 @@ class MatrixUtils:
                     linha_pontos.append(start)
 
                 elif len(valor) == 1 and valor.isalpha():
-                    if valor in pontos_letras:
-                        raise ValueError(f"A letra '{valor} aparece mais de uma vez na matriz")
+                    if valor in pontos:
+                        raise ValueError(f"A letra '{valor}' aparece mais de uma vez na matriz.")
                     ponto = Ponto(x=x, y=y)
-                    pontos_letras[valor] = ponto
+                    pontos[valor] = ponto
                     linha_pontos.append(ponto)
 
                 else:
-                    linha_pontos.append(None)
+                    linha_pontos.append(0)
 
             matriz_pontos.append(linha_pontos)
 
@@ -44,13 +41,13 @@ class MatrixUtils:
                 "A matriz deve conter exatamente um ponto inicial 'R'."
             )
 
-        letras_esperadas = ALFABETO_SEM_R[:len(pontos_letras)]
-        if sorted(pontos_letras.keys()) != letras_esperadas:
-            raise ValueError(f"Os pontos de entrega devem ser as letras {letras_esperadas}, em sequência e sem pular nenhuma.")
+        if not pontos:
+            raise ValueError("A matriz deve conter ao menos um ponto de entrega.")
         
         return MatrixResponse(
             matrix=matriz_pontos,
-            start=start
+            start=start,
+            pontos=pontos
         )
 
     @staticmethod
@@ -64,7 +61,7 @@ class MatrixUtils:
 
         possibilidades: list[list[Ponto]] = []
 
-        for permutacao in permutations(pontos):
+        for permutacao in permutations(matrix_response.pontos):
             caminho = [matrix_response.start, *permutacao]
             possibilidades.append(caminho)
 
