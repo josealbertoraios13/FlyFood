@@ -4,7 +4,6 @@ from model import CaminhoCalculado, MenorCaminhoResponse, Ponto
 class CaminhoUtils:
     @staticmethod
     def encontrar_o_menor(caminhos_calculados: list[CaminhoCalculado]) -> MenorCaminhoResponse:
-        print("Rivan")
         if not caminhos_calculados:
             raise ValueError("A lista de possibilidades não pode estar vazia.")
 
@@ -21,18 +20,12 @@ class CaminhoUtils:
         )
 
     @staticmethod
-    def calcular_caminhos(caminhos : list[list[Ponto]]) -> list[CaminhoCalculado]:
-        caminhos_calculados : list[CaminhoCalculado] = []
-        print("Jose")
-        for _, caminho in enumerate(caminhos):
-            tamanho_do_caminho : int = 0
-            for i, ponto in enumerate(caminho):
-                if i + 1 >= len(caminho):
-                    break
+    def calcular_caminho(caminho : list[Ponto]) -> float:
+        tamanho_do_caminho : int = 0
+        for i, ponto in enumerate(caminho):
+            if i + 1 >= len(caminho):
+                tamanho_do_caminho += abs(ponto.x - caminho[0].x) + abs(ponto.y - caminho[0].y)
 
-                tamanho_do_caminho += abs(ponto.x - caminho[i + 1].x) + abs(ponto.y - caminho[i + 1].y)
+            tamanho_do_caminho += abs(ponto.x - caminho[i + 1].x) + abs(ponto.y - caminho[i + 1].y)
 
-            caminhos_calculados.append(CaminhoCalculado(caminho=caminho, tamanho_do_caminho=tamanho_do_caminho))
-
-        print("todos os caminhos calculados com sucesso")
-        return caminhos_calculados
+        return tamanho_do_caminho
