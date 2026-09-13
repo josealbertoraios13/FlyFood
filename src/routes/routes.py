@@ -26,7 +26,6 @@ async def obter_pontos(dados: MatrixInput) -> MenorCaminhoResponse:
 }
     """
 
-    print("Davi")
     try:
         return processar_matrix(dados.matrix)
     except ValueError as e:

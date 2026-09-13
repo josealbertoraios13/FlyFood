@@ -46,17 +46,16 @@ class MatrixUtils:
     @staticmethod
     def gerar_possibilidades(matrix_response: MatrixResponse) -> list[list[Ponto]]:
         pontos: list[Ponto] = []
-        print("Kauan")
         for linha in matrix_response.matrix:
             for ponto in linha:
                 if ponto is not None and ponto != matrix_response.start:
                     pontos.append(ponto)
 
         possibilidades: list[list[Ponto]] = []
+        # 10 -> 10! = 3*10⁶
 
         for permutacao in permutations(pontos):
             caminho = [matrix_response.start, *permutacao]
             possibilidades.append(caminho)
 
-        print("Todas as possibilidades geradas com sucesso")
         return possibilidades
