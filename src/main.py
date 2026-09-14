@@ -1,8 +1,12 @@
-from fastapi import FastAPI
+from pathlib import Path
 
-from routes import router
+from routes import carregar_matrix
 
-app = FastAPI(title="FLyFood API")
-app.include_router(router)
+CAMINHO_JSON = Path(__file__).parent.parent / "matrix.json"
 
-# From the project root: .venv/bin/uvicorn main:app --app-dir src --reload
+if __name__ == "__main__":
+    resultado = carregar_matrix(CAMINHO_JSON)
+
+    print(f"Rota: {resultado.rota}")
+    print(f"Distância: {resultado.distancia} dronômetros")
+    print(f"Tempo de resolução: {resultado.tempo_resolucao}s")

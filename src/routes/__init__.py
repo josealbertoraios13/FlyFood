@@ -1,3 +1,3 @@
-from routes.routes import router
+from routes.routes import carregar_matrix
 
-__all__ = ["router"]
+__all__ = ["carregar_matrix"]
