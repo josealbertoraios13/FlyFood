@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from routes import carregar_matrix
+from utils import InfoPC
 
 CAMINHO_JSON = Path(__file__).parent.parent / "matrix.json"
 
@@ -10,3 +11,5 @@ if __name__ == "__main__":
     print(f"Rota: {resultado.rota}")
     print(f"Distância: {resultado.distancia} dronômetros")
     print(f"Tempo de resolução: {resultado.tempo_resolucao}s")
+
+    InfoPC().perguntar_exibir_info()
