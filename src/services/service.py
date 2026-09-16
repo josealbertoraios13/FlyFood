@@ -1,7 +1,7 @@
 import time
 
-from model import CaminhoCalculado, MatrixResponse, MenorCaminhoResponse, Ponto
-from utils import CaminhoUtils, MatrixUtils
+from model import MatrixResponse, MenorCaminhoResponse
+from utils import MatrixUtils
 
 
 def processar_matrix(matrix_str : list[list[str]]) -> MenorCaminhoResponse:
@@ -9,23 +9,19 @@ def processar_matrix(matrix_str : list[list[str]]) -> MenorCaminhoResponse:
 
     matrix_response : MatrixResponse = MatrixUtils.matriz_para_pontos(matrix_str)
 
-    possibilidades_de_caminhos : list[list[Ponto]] = MatrixUtils.gerar_possibilidades(matrix_response=matrix_response)
-
-    caminhos_calculados : list[CaminhoCalculado] = CaminhoUtils.calcular_caminhos(caminhos=possibilidades_de_caminhos)
-
-    meno_rota = CaminhoUtils.encontrar_o_menor(caminhos_calculados=caminhos_calculados)
+    menor_caminho : MenorCaminhoResponse = MatrixUtils.ver_possibilidades(matrix_response=matrix_response)
 
     letra_por_coordenada = {
         (ponto.x, ponto.y): letra for letra, ponto in matrix_response.pontos.items()
     }
 
-    meno_rota.rota = " ".join(
+    menor_caminho.rota = " ".join(
         letra_por_coordenada[(ponto.x, ponto.y)]
-        for ponto in meno_rota.caminho
+        for ponto in menor_caminho.caminho
         if (ponto.x, ponto.y) in letra_por_coordenada
-    )
+    )[::-1]
 
     fim_time = time.perf_counter()
-    meno_rota.tempo_resolucao = round((fim_time - inicio_time) * 1000, 2)
+    menor_caminho.tempo_resolucao = round((fim_time - inicio_time), 2)
 
-    return meno_rota
+    return menor_caminho
