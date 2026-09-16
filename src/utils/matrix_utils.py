@@ -60,5 +60,7 @@ class MatrixUtils:
             possibilidades.append(caminho)
 
         caminhos_calculados = CaminhoUtils.calcular_caminhos(caminhos=possibilidades)
-        
-        return possibilidades
+
+        menor_caminho = CaminhoUtils.encontrar_o_menor(caminhos_calculados=caminhos_calculados)
+
+        return [menor_caminho.caminho]
