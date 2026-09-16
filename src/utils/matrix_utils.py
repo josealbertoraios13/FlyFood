@@ -1,6 +1,7 @@
 from itertools import permutations
 
 from model import MatrixResponse, Ponto
+from utils.caminho_utils import CaminhoUtils
 
 class MatrixUtils:
     @staticmethod
@@ -58,4 +59,8 @@ class MatrixUtils:
             caminho = [matrix_response.start, *permutacao]
             possibilidades.append(caminho)
 
-        return possibilidades
+        caminhos_calculados = CaminhoUtils.calcular_caminhos(caminhos=possibilidades)
+
+        menor_caminho = CaminhoUtils.encontrar_o_menor(caminhos_calculados=caminhos_calculados)
+
+        return [menor_caminho.caminho]
