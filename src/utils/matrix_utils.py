@@ -1,7 +1,8 @@
 from itertools import permutations
 
-from model import MatrixResponse, Ponto
+from model import MatrixResponse, MenorCaminhoResponse, Ponto
 from utils.caminho_utils import CaminhoUtils
+
 
 class MatrixUtils:
     @staticmethod
@@ -52,15 +53,23 @@ class MatrixUtils:
         )
 
     @staticmethod
-    def gerar_possibilidades(matrix_response: MatrixResponse) -> list[list[Ponto]]:
-        possibilidades: list[list[Ponto]] = []
+    def ver_possibilidades(matrix_response: MatrixResponse) -> MenorCaminhoResponse:
+        caminho : list[Ponto] = []
+        tamanho_do_caminho : int = 0
 
         for permutacao in permutations(matrix_response.pontos.values()):
-            caminho = [matrix_response.start, *permutacao]
-            possibilidades.append(caminho)
+            caminho_atual : list[Ponto] = [matrix_response.start, *permutacao]
 
-        caminhos_calculados = CaminhoUtils.calcular_caminhos(caminhos=possibilidades)
+            tamanho_do_caminho_atual : int = CaminhoUtils.calcular_caminho(caminho=caminho_atual)
 
-        menor_caminho = CaminhoUtils.encontrar_o_menor(caminhos_calculados=caminhos_calculados)
+            if len(caminho) == 0:
+                caminho = caminho_atual
+                tamanho_do_caminho = tamanho_do_caminho_atual
+                continue
 
-        return [menor_caminho.caminho]
+            if tamanho_do_caminho_atual <= tamanho_do_caminho:
+                caminho = caminho_atual
+                tamanho_do_caminho = tamanho_do_caminho_atual
+                continue
+
+        return MenorCaminhoResponse(caminho=caminho, tamanho_do_caminho=tamanho_do_caminho)
